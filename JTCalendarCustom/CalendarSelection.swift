@@ -158,7 +158,7 @@ class CalendarSelection: UIViewController {
     
     func handleCellColor(cell: TestRangeSelectionViewControllerCell, cellState: CellState) {
         if cellState.dateBelongsTo == .thisMonth {
-            cell.label.textColor = .white
+            cell.label.textColor = .lightGray
         } else {
             cell.label.textColor = .darkGray
         }
@@ -196,9 +196,14 @@ class CalendarSelection: UIViewController {
                 cell.selectedView.backgroundColor = backgroudViewColor
                 cell.selectedView.roundCorners([.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner], radius: cell.selectedView.frame.size.width/2)
                 cell.selectedView.isHidden = true
+                // Define and create attributes/shadow for calendar
                 cell.label.textColor = .black
-                cell.label.font = .boldSystemFont(ofSize: 18)
-                cell.circleView.dropShadow(color: .white, opacity: 1, offSet: CGSize(width: -1, height: 1), radius: 2, scale: true, cornerRadius: cell.circleView.frame.height/2)
+                let labelFont = UIFont(name: "HelveticaNeue-Bold", size: 18)
+                let attributes :Dictionary = [NSAttributedString.Key.font : labelFont]
+                let attrString = NSAttributedString(string: cell.label.text ?? "", attributes:attributes as [NSAttributedString.Key : Any])
+                cell.label.attributedText = attrString
+                cell.circleView.dropShadow(color: .white, opacity: 1, offSet: CGSize(width: 0, height: 0), radius: 2, scale: true, cornerRadius: cell.circleView.frame.height/2)
+                //============================================
             default:
                 cell.circleView.isHidden = true
                 break

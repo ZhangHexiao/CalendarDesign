@@ -67,8 +67,8 @@ public extension UIDevice {
     @IBInspectable open var localizeString:String = "" {
         didSet {
             #if TARGET_INTERFACE_BUILDER
-            let bundle = NSBundle(forClass: type(of: self))
-            self.text = bundle.localizedStringForKey(self.localizeString, value:"", table: nil)
+            let bundle = Bundle(for: type(of: self))
+            self.text = bundle.localizedString(forKey: self.localizeString, value:"", table: nil)
             #else
             self.text = self.localizeString
             #endif
@@ -87,8 +87,8 @@ public extension UIDevice {
     @IBInspectable open var localizeString:String = "" {
         didSet {
             #if TARGET_INTERFACE_BUILDER
-            let bundle = NSBundle(forClass: type(of: self))
-            self.setTitle(bundle.localizedStringForKey(self.localizeString, value:"", table: nil), for: .normal)
+            let bundle = Bundle(for: type(of: self))
+            self.setTitle(bundle.localizedString(forKey: self.localizeString, value:"", table: nil), for: .normal)
             #else
             self.setTitle(self.localizeString, for: .normal)
             #endif
