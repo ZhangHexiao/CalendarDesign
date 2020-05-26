@@ -39,7 +39,7 @@ class CalendarSelection: UIViewController {
     @IBOutlet weak var calendarWidth: NSLayoutConstraint!
     @IBOutlet weak var calendarHeight: NSLayoutConstraint!
     
-    let backgroudViewColor = UIColor.init(red: 235/255, green: 235/255, blue: 235/255, alpha: 1.0)
+    let backgroudViewColor = UIColor.init(red: 230/255, green: 0, blue: 0, alpha: 0.5)
     
     @IBAction func onBack(_ sender: Any) {
         Utility.backToPreviousScreen(self)
@@ -167,10 +167,6 @@ class CalendarSelection: UIViewController {
     func handleCellSelection(cell: TestRangeSelectionViewControllerCell, cellState: CellState) {
         if cellState.dateBelongsTo == .thisMonth {
             cell.selectedView.isHidden = !cellState.isSelected
-//            print("Start Clicking")
-//            print("Position: \(cellState.selectedPosition())")
-//            print("Finish Clicking")
-            
             switch cellState.selectedPosition() {
             case .left:
                 cell.circleView.isHidden = false
@@ -179,8 +175,6 @@ class CalendarSelection: UIViewController {
                 cell.selectedView.backgroundColor = backgroudViewColor
                 cell.selectedView.roundCorners([.layerMinXMaxYCorner, .layerMinXMinYCorner], radius: cell.selectedView.frame.size.width/2)
                 cell.label.textColor = .white
-                print("1")
-                
             case .middle:
                 cell.circleView.isHidden = true
                 cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
@@ -188,7 +182,6 @@ class CalendarSelection: UIViewController {
                 cell.selectedView.backgroundColor = backgroudViewColor
                 cell.selectedView.roundCorners([], radius: 0)
                 cell.label.textColor = .white
-               print("2")
             case .right:
                 cell.circleView.isHidden = false
                 cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
@@ -196,7 +189,6 @@ class CalendarSelection: UIViewController {
                 cell.selectedView.backgroundColor = backgroudViewColor
                 cell.selectedView.roundCorners([.layerMaxXMaxYCorner, .layerMaxXMinYCorner], radius: cell.selectedView.frame.size.width/2)
                 cell.label.textColor = .white
-                print("3")
             case .full:
                 cell.circleView.isHidden = false
                 cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
@@ -207,11 +199,8 @@ class CalendarSelection: UIViewController {
                 cell.label.textColor = .black
                 cell.label.font = .boldSystemFont(ofSize: 18)
                 cell.circleView.dropShadow(color: .white, opacity: 1, offSet: CGSize(width: -1, height: 1), radius: 2, scale: true, cornerRadius: cell.circleView.frame.height/2)
-                print("4")
             default:
                 cell.circleView.isHidden = true
-//                cell.circleView.dropShadow(scale: true)
-                print("5")
                 break
             }
         } else {
@@ -240,7 +229,7 @@ extension CalendarSelection: JTAppleCalendarViewDelegate, JTAppleCalendarViewDat
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
-        setupMonthLabel(date: Date())
+        setupMonthLabel(date: visibleDates.monthDates.first!.date)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {

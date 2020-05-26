@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  JTCalendarCustom
 //
-//  Created by Lam Le Tung on 12/14/18.
-//  Copyright © 2018 ltlam. All rights reserved.
+//  Created Hexiao Zhang on 05/26/19.
+//  Copyright © 2020 ltlam. All rights reserved.
 //
 
 import UIKit
