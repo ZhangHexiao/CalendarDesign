@@ -8,14 +8,13 @@
 This project is used JTAppleCalendar
 
 A custom JTCalendar to let you: <br/>
-1. Select one day<br/>
-2. Select range of day (range selection)<br/>
-3. Custom your own style<br/>
+1. Select a single day<br/>
+2. Send back the date information<br/>
+3. Custom your own style(add blur on the select view)<br/>
 
 ## Screenshots
-![alt text](https://github.com/lamkjbo/JTCalendarCustom/blob/master/Calendar_demo.jpeg)
+![alt text](https://github.com/ZhangHexiao/CalendarDesign/blob/master/Screen%20Shot%202020-05-25%20at%2023.11.46.png)
 
 
 #Author
-
-Le Tung Lam
+Hexiao Zhang
