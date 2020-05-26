@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BCp-oR-BlS">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ykz-ha-HwP">
-                                <rect key="frame" x="32" y="359.5" width="311" height="48"/>
+                                <rect key="frame" x="32" y="381.5" width="311" height="48"/>
                                 <color key="backgroundColor" red="0.90196078430000004" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="LQ7-7a-NXK"/>
@@ -44,7 +44,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnH-zM-rhG">
-                                <rect key="frame" x="16" y="242" width="343" height="21.5"/>
+                                <rect key="frame" x="16" y="264" width="343" height="21.5"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -61,6 +61,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="mcA-iP-3Tr"/>
                     <connections>
                         <outlet property="lbrangeDates" destination="ZnH-zM-rhG" id="1eg-cy-aLk"/>
                         <segue destination="Eb6-ce-rU7" kind="show" identifier="showCalendar" id="hdR-jB-Bf4"/>
@@ -68,20 +69,20 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="289" y="134"/>
+            <point key="canvasLocation" x="1228" y="133.5832083958021"/>
         </scene>
         <!--Calendar Selection-->
         <scene sceneID="Het-D6-3b9">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="Eb6-ce-rU7" customClass="CalendarSelection" customModule="JTCalendarCustom" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CalendarSelectionController" hidesBottomBarWhenPushed="YES" id="Eb6-ce-rU7" customClass="CalendarSelection" customModule="JTCalendarCustom" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Yxa-Nd-ufX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hKf-u1-kAY" userLabel="topView">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="105"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="105"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCx-I8-XhA">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCx-I8-XhA">
                                         <rect key="frame" x="323" y="8" width="36" height="36"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="36" id="ZLx-1m-vf3"/>
@@ -154,7 +155,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sKa-XH-lvp" userLabel="bottomView">
-                                <rect key="frame" x="0.0" y="467" width="375" height="180"/>
+                                <rect key="frame" x="0.0" y="487" width="375" height="180"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mxe-jU-r73" customClass="LocalizableButton" customModule="JTCalendarCustom" customModuleProvider="target">
                                         <rect key="frame" x="16" y="120" width="343" height="44"/>
@@ -240,7 +241,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cnc-fd-rhw">
-                                <rect key="frame" x="0.0" y="105" width="375" height="340"/>
+                                <rect key="frame" x="0.0" y="149" width="375" height="340"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="C5H-Vn-SC7">
                                         <rect key="frame" x="5" y="0.0" width="365" height="18"/>
@@ -397,6 +398,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="41o-Cs-zlC"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Wiw-tY-nv0"/>
                     <connections>
                         <outlet property="btnApplyDateSelection" destination="wsE-zP-I0e" id="g2P-Wi-lFh"/>
                         <outlet property="calendarHeight" destination="jGx-om-rvw" id="pe8-MR-uyi"/>
@@ -417,7 +419,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUw-b9-DmD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="134"/>
+            <point key="canvasLocation" x="2064.8000000000002" y="133.5832083958021"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Fjh-S6-xQ6">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BCp-oR-BlS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9jT-bA-Wbh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="PP8-tx-1uU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cTT-oL-gXM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="288.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
     <resources>

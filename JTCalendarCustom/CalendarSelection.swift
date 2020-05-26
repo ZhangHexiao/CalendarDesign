@@ -135,9 +135,12 @@ class CalendarSelection: UIViewController {
         let calendar = Calendar.current
         let anchorComponents = calendar.dateComponents([.day, .month, .year], from: date)
         let year = String(anchorComponents.year ?? 2018)
-        let month = String(anchorComponents.month ?? 1)
-        monthLabel.text = month
-//        monthLabel.text = DateFormatter().monthSymbols[anchorComponents.month!]
+        if let month = anchorComponents.month{
+            monthLabel.text = DateFormatter().monthSymbols[month - 1]
+        } else {
+             monthLabel.text = DateFormatter().monthSymbols[0]
+        }
+        
         yearLabel.text = year
         
         // day of week
@@ -383,6 +386,17 @@ extension CalendarSelection {
         
         let result = String(format: "%1$@-%2$@-%3$@", day, month, year)
         return result
+    }
+}
+
+// MARK: - Instance View Controller
+extension CalendarSelection {
+    static var instance: CalendarSelection {
+        guard let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CalendarSelectionController") as? CalendarSelection else {
+            assertionFailure("Something wrong while instantiating ProfileController")
+            return CalendarSelection()
+        }
+        return vc
     }
 }
 

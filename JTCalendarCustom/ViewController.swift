@@ -33,7 +33,9 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showCalendar(_ sender: Any) {
-        performSegue(withIdentifier: "showCalendar", sender: nil)
+//        performSegue(withIdentifier: "showCalendar", sender: nil)
+//        let x = CalendarSelection()
+        navigationController?.pushViewController(CalendarSelection.instance, animated: true)
     }
     
 }
