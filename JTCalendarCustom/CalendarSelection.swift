@@ -64,8 +64,22 @@ class CalendarSelection: UIViewController {
         Utility.backToPreviousScreen(self)
     }
     
-    func initData(_ dates: [Date]) {
+    func loadNavbar() {
+            let itemNew = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_chevron_left"), style: .plain, target: self, action: #selector(setBack))
+        navigationItem.leftBarButtonItem = itemNew
+        let textChangeColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textChangeColor
+        navigationItem.title = "Please select a date"
+        navigationController?.navigationBar.barStyle = .black
+        navigationItem.leftBarButtonItem?.tintColor = .white
         
+    }
+    
+    @objc func setBack() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    func initData(_ dates: [Date]) {
         calendarView.selectDates(
             from: dates.first!,
             to: dates.last!,
@@ -106,7 +120,7 @@ class CalendarSelection: UIViewController {
         
         //        calendarView.minimumLineSpacing = 0
         calendarView.minimumInteritemSpacing = 0
-        
+        loadNavbar()
         activeButton()
     }
     
