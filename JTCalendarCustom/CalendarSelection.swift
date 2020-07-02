@@ -10,7 +10,7 @@ import UIKit
 import JTAppleCalendar
 
 class CalendarSelection: UIViewController {
-
+    
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet var calendarView: JTAppleCalendarView!
@@ -28,7 +28,7 @@ class CalendarSelection: UIViewController {
     let formatter = DateFormatter()
     var datesToDeselect: [Date]?
     var dateSelect = Date()
-    
+    var datesSelect: [Date]?
     var delegate:CalendarDelegate?
     var startDate = Date()
     var endDate = Date()
@@ -36,6 +36,7 @@ class CalendarSelection: UIViewController {
     var isClear = true
     var isClearDates = false
     var datesRange = -1
+    let df = DateFormatter()
     @IBOutlet weak var calendarWidth: NSLayoutConstraint!
     @IBOutlet weak var calendarHeight: NSLayoutConstraint!
     
@@ -65,7 +66,7 @@ class CalendarSelection: UIViewController {
     }
     
     func loadNavbar() {
-            let itemNew = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_chevron_left"), style: .plain, target: self, action: #selector(setBack))
+        let itemNew = UIBarButtonItem(image: #imageLiteral(resourceName: "ic_chevron_left"), style: .plain, target: self, action: #selector(setBack))
         navigationItem.leftBarButtonItem = itemNew
         let textChangeColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textChangeColor
@@ -97,7 +98,7 @@ class CalendarSelection: UIViewController {
         }
     }
     
-    let df = DateFormatter()
+//    let df = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,6 +119,12 @@ class CalendarSelection: UIViewController {
         calendarView.isRangeSelectionUsed = false
         calendarView.allowsMultipleSelection = false
         
+        df.dateFormat = "MM-dd-yyyy"
+        let date1 = df.date(from: "07-02-2020")!
+        let date2 = df.date(from: "07-03-2020")!
+        let datesSelect: [Date] = [date, date1, date2]
+        
+//        selectedDates = datesSelect
         //        calendarView.minimumLineSpacing = 0
         calendarView.minimumInteritemSpacing = 0
         loadNavbar()
@@ -152,7 +159,7 @@ class CalendarSelection: UIViewController {
         if let month = anchorComponents.month{
             monthLabel.text = DateFormatter().monthSymbols[month - 1]
         } else {
-             monthLabel.text = DateFormatter().monthSymbols[0]
+            monthLabel.text = DateFormatter().monthSymbols[0]
         }
         
         yearLabel.text = year
@@ -175,8 +182,17 @@ class CalendarSelection: UIViewController {
     
     func handleCellColor(cell: TestRangeSelectionViewControllerCell, cellState: CellState) {
         if cellState.dateBelongsTo == .thisMonth {
-            cell.label.textColor = .lightGray
+            let datesSelectString: [String] = ["07-03-2020", "07-04-2020", "07-05-2020"]
+            df.dateFormat = "MM-dd-yyyy"
+            let formattedDateString = df.string(from: cellState.date)
+            
+            if datesSelectString.contains(formattedDateString){
+           
+                cell.label.textColor = .lightGray}else{
+                cell.label.textColor = .darkGray
+            }
         } else {
+            
             cell.label.textColor = .darkGray
         }
     }
@@ -185,28 +201,28 @@ class CalendarSelection: UIViewController {
         if cellState.dateBelongsTo == .thisMonth {
             cell.selectedView.isHidden = !cellState.isSelected
             switch cellState.selectedPosition() {
-            case .left:
-                cell.circleView.isHidden = false
-                cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
-                
-                cell.selectedView.backgroundColor = backgroudViewColor
-                cell.selectedView.roundCorners([.layerMinXMaxYCorner, .layerMinXMinYCorner], radius: cell.selectedView.frame.size.width/2)
-                cell.label.textColor = .white
-            case .middle:
-                cell.circleView.isHidden = true
-                cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
-                
-                cell.selectedView.backgroundColor = backgroudViewColor
-                cell.selectedView.roundCorners([], radius: 0)
-                cell.label.textColor = .white
-            case .right:
-                cell.circleView.isHidden = false
-                cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
-                
-                cell.selectedView.backgroundColor = backgroudViewColor
-                cell.selectedView.roundCorners([.layerMaxXMaxYCorner, .layerMaxXMinYCorner], radius: cell.selectedView.frame.size.width/2)
-                cell.label.textColor = .white
-            case .full:
+                //            case .left:
+                //                cell.circleView.isHidden = false
+                //                cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
+                //
+                //                cell.selectedView.backgroundColor = backgroudViewColor
+                //                cell.selectedView.roundCorners([.layerMinXMaxYCorner, .layerMinXMinYCorner], radius: cell.selectedView.frame.size.width/2)
+                //                cell.label.textColor = .white
+                //            case .middle:
+                //                cell.circleView.isHidden = true
+                //                cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
+                //
+                //                cell.selectedView.backgroundColor = backgroudViewColor
+                //                cell.selectedView.roundCorners([], radius: 0)
+                //                cell.label.textColor = .white
+                //            case .right:
+                //                cell.circleView.isHidden = false
+                //                cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
+                //
+                //                cell.selectedView.backgroundColor = backgroudViewColor
+                //                cell.selectedView.roundCorners([.layerMaxXMaxYCorner, .layerMaxXMinYCorner], radius: cell.selectedView.frame.size.width/2)
+            //                cell.label.textColor = .white
+            case .full, .left, .right, .middle:
                 cell.circleView.isHidden = false
                 cell.circleView.layer.cornerRadius = cell.circleView.frame.size.width/2
                 
@@ -243,7 +259,15 @@ extension CalendarSelection: JTAppleCalendarViewDelegate, JTAppleCalendarViewDat
         cell.label.text = cellState.text
         self.calendar(calendar, willDisplay: cell, forItemAt: date, cellState: cellState, indexPath: indexPath)
         if cellState.dateBelongsTo == .thisMonth {
-            cell.isUserInteractionEnabled = true
+            let datesSelectString: [String] = ["07-03-2020", "07-04-2020", "07-05-2020"]
+            df.dateFormat = "MM-dd-yyyy"
+            let formattedDateString = df.string(from: date)
+//            print(formattedDateString)
+            if datesSelectString.contains(formattedDateString){
+                cell.isUserInteractionEnabled = true}
+            else{
+                cell.isUserInteractionEnabled = false
+            }
         } else {
             cell.isUserInteractionEnabled = false
         }
@@ -259,7 +283,7 @@ extension CalendarSelection: JTAppleCalendarViewDelegate, JTAppleCalendarViewDat
         handleConfiguration(cell: cell, cellState: cellState)
         activeButton()
         isSelected = false
-        //if (calendar.selectedDates.count > 1) {
+//        if (calendar.selectedDates.count > 1) {
         if (isClearDates) {
             self.isClearDates = false
             //calendar.deselectAllDates()
